@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agro Popular Science Writer</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --ink: #13241d;
+        --muted: #607269;
+        --line: #d5ded8;
+        --paper: #fffefb;
+        --card: #ffffff;
+        --soft: #eef5f1;
+        --green: #0f5a3f;
+        --deep: #0b261d;
+        --lime: #d8f45b;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { width: 100%; min-height: 100%; margin: 0; }
+      body { background: transparent; color: var(--ink); padding: 12px; }
+      button, input, select, textarea { font: inherit; }
+      button { cursor: pointer; }
+      button:disabled { cursor: not-allowed; opacity: .48; }
+
+      .shell {
+        overflow: hidden;
+        max-width: 1120px;
+        margin: 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--card);
+        box-shadow: 0 16px 50px rgba(20, 54, 40, .10);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 20px;
+        background: var(--deep);
+        color: white;
+      }
+
+      .kicker, .eyebrow {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+      }
+
+      .kicker { color: #b9d7c8; }
+      .eyebrow { color: #64776e; }
+      h1 { margin: 4px 0 0; font-size: 20px; letter-spacing: -.02em; }
+      h2 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+      h3 { margin: 0; font-size: 15px; }
+
+      .header-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+      .ghost, .primary, .secondary, .icon-button {
+        min-height: 38px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        padding: 0 13px;
+        font-weight: 750;
+      }
+
+      .ghost { border-color: rgba(255,255,255,.22); background: transparent; color: white; }
+      .primary { background: var(--green); color: white; }
+      .secondary { border-color: var(--line); background: white; color: var(--ink); }
+      .icon-button { min-width: 38px; padding: 0 10px; border-color: var(--line); background: white; }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-bottom: 1px solid var(--line);
+        background: #f6f9f7;
+      }
+
+      .tab {
+        border: 0;
+        border-right: 1px solid var(--line);
+        background: transparent;
+        padding: 11px 8px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 750;
+      }
+
+      .tab:last-child { border-right: 0; }
+      .tab.active { background: var(--lime); color: var(--deep); }
+      .panel { display: none; padding: 20px; }
+      .panel.active { display: block; }
+      .panel-head { margin-bottom: 18px; }
+      .panel-head p { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+      .grid { display: grid; gap: 14px; }
+      .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .field { display: grid; gap: 6px; }
+      .field label { font-size: 12px; font-weight: 800; }
+      .field small { color: var(--muted); line-height: 1.4; }
+      input, select, textarea {
+        width: 100%;
+        border: 1px solid #c9d5ce;
+        border-radius: 10px;
+        background: white;
+        color: var(--ink);
+        padding: 10px 11px;
+        outline: none;
+      }
+      input:focus, select:focus, textarea:focus { border-color: #378264; box-shadow: 0 0 0 3px rgba(55,130,100,.12); }
+      textarea { min-height: 88px; resize: vertical; line-height: 1.5; }
+
+      .action-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+      .status { min-height: 20px; margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+      .status.error { color: #a34b17; }
+      .status.success { color: #17653d; }
+
+      .titles { display: grid; gap: 9px; margin-top: 16px; }
+      .title-card {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: #fbfcfb;
+        color: var(--ink);
+        padding: 13px;
+        text-align: left;
+      }
+      .title-card.selected { border-color: #24714f; background: #edf7f1; box-shadow: inset 4px 0 #24714f; }
+      .title-card strong { display: block; font-family: Georgia, serif; font-size: 16px; line-height: 1.35; }
+      .title-card span { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+      .title-card em { display: inline-block; margin-top: 8px; border-radius: 999px; background: white; padding: 4px 8px; color: #226447; font-family: inherit; font-size: 11px; font-style: normal; font-weight: 800; }
+
+      .framework {
+        margin-top: 16px;
+        border-radius: 14px;
+        background: var(--deep);
+        color: white;
+        padding: 15px;
+      }
+      .framework p { margin: 5px 0 0; color: #cbe0d5; font-size: 12px; line-height: 1.5; }
+      .framework ul { margin: 11px 0 0; padding-left: 18px; color: #dce9e2; font-size: 12px; line-height: 1.55; }
+
+      .reference-form { border: 1px solid var(--line); border-radius: 14px; background: #fbfcfb; padding: 15px; }
+      .reference-list { display: grid; gap: 9px; margin-top: 15px; }
+      .reference-row { display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+      .reference-preview {
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+        padding-left: 24px;
+        text-indent: -24px;
+        font-family: Georgia, serif;
+        font-size: 12px;
+        line-height: 1.65;
+      }
+      .reference-preview em { font-style: italic; }
+
+      .gate {
+        margin-top: 18px;
+        border: 1px solid #bcd7cb;
+        border-radius: 14px;
+        background: #edf7f1;
+        padding: 15px;
+      }
+      .gate p { margin: 5px 0 0; color: #365a49; font-size: 12px; line-height: 1.5; }
+
+      .article {
+        max-height: 680px;
+        overflow: auto;
+        border-radius: 14px;
+        background: var(--paper);
+        padding: 22px;
+        font-family: Georgia, "Times New Roman", serif;
+        line-height: 1.75;
+      }
+      .article h1 { color: #0b2c20; font-size: 28px; line-height: 1.1; }
+      .article h2 { margin-top: 26px; color: #125239; font-family: Inter, sans-serif; font-size: 13px; letter-spacing: .09em; text-transform: uppercase; }
+      .article p { margin: 12px 0 0; }
+      .article .reference { padding-left: 30px; text-indent: -30px; font-size: 13px; }
+      .article-empty { padding: 60px 20px; text-align: center; color: var(--muted); }
+      .notes { margin-top: 14px; border-left: 3px solid var(--lime); padding-left: 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+      .hidden { display: none !important; }
+
+      @media (max-width: 720px) {
+        body { padding: 0; }
+        .shell { border-radius: 0; border-left: 0; border-right: 0; }
+        .topbar { align-items: flex-start; }
+        .header-actions { justify-content: flex-end; }
+        .two, .three { grid-template-columns: 1fr; }
+        .panel { padding: 16px; }
+        .tab { font-size: 11px; }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #e5eee9;
+          --muted: #a7b9af;
+          --line: #385046;
+          --paper: #14251e;
+          --card: #102119;
+          --soft: #193128;
+        }
+        body { color: var(--ink); }
+        .steps, .title-card, .reference-form { background: #13271f; }
+        input, select, textarea, .secondary, .icon-button { background: #152b22; color: var(--ink); border-color: #466056; }
+        .title-card em { background: #19372b; }
+        .gate { background: #173426; border-color: #37644f; }
+        .gate p { color: #b8d2c5; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="kicker">ChatGPT writing workspace</p>
+          <h1>Agro Popular Science Writer</h1>
+        </div>
+        <div class="header-actions">
+          <button id="fullscreen" class="ghost" type="button">Fullscreen</button>
+          <button id="open-site" class="ghost" type="button">Standalone</button>
+        </div>
+      </header>
+
+      <nav class="steps" aria-label="Writer steps">
+        <button class="tab active" data-tab="subject" type="button">1 Subject & title</button>
+        <button class="tab" data-tab="evidence" type="button">2 Evidence</button>
+        <button class="tab" data-tab="references" type="button">3 APA references</button>
+        <button class="tab" data-tab="draft" type="button">4 Draft</button>
+      </nav>
+
+      <section id="panel-subject" class="panel active">
+        <div class="panel-head">
+          <p class="eyebrow">Subject-first planning</p>
+          <h2>Define the scientific story</h2>
+          <p>Location is not required. Add geography only when it is scientifically relevant to the evidence.</p>
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="subject">Scientific subject</label>
+            <input id="subject" placeholder="Example: Heat-driven changes in spider mite outbreaks" />
+          </div>
+          <div class="two grid">
+            <div class="field">
+              <label for="field">Field</label>
+              <select id="field">
+                <option>Agricultural entomology</option>
+                <option>Acarology</option>
+                <option>Crop protection</option>
+                <option>Pollination</option>
+                <option>Soil and plant health</option>
+                <option>Agricultural technology</option>
+                <option>Food systems</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="audience">Audience</label>
+              <select id="audience">
+                <option>General science readers</option>
+                <option>Students and researchers</option>
+                <option>Policy and extension professionals</option>
+                <option>Agricultural industry readers</option>
+              </select>
+            </div>
+          </div>
+          <div class="three grid">
+            <div class="field">
+              <label for="article-form">Article form</label>
+              <select id="article-form">
+                <option>Popular science feature</option>
+                <option>Research news article</option>
+                <option>Mechanism explainer</option>
+                <option>Emerging issue</option>
+                <option>Science profile</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="trend">Trend angle</label>
+              <select id="trend">
+                <option>Emerging research</option>
+                <option>Climate pressure</option>
+                <option>Resistance evolution</option>
+                <option>Biological control</option>
+                <option>Biodiversity change</option>
+                <option>New detection technology</option>
+                <option>Food-system relevance</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="target-words">Target words</label>
+              <input id="target-words" type="number" min="500" max="3000" step="100" value="1000" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="why-now">Why does this matter now?</label>
+            <textarea id="why-now" placeholder="Describe the current study, scientific development, unresolved problem or verified trend."></textarea>
+            <small>ChatGPT must verify this angle before presenting it as current.</small>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button id="suggest-titles" class="primary" type="button">Suggest titles</button>
+          <span id="title-status" class="status"></span>
+        </div>
+        <div id="titles" class="titles"></div>
+
+        <div id="author-section" class="hidden">
+          <div class="field" style="margin-top:16px">
+            <label for="author">Selected author framework</label>
+            <select id="author"></select>
+          </div>
+          <div id="framework" class="framework"></div>
+        </div>
+
+        <div class="action-row">
+          <button class="secondary next" data-next="evidence" type="button">Continue to evidence</button>
+        </div>
+      </section>
+
+      <section id="panel-evidence" class="panel">
+        <div class="panel-head">
+          <p class="eyebrow">Evidence gate</p>
+          <h2>Separate findings from interpretation</h2>
+          <p>Use verifiable notes. ChatGPT will research and check these claims before drafting.</p>
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="finding">Central verified finding</label>
+            <textarea id="finding" placeholder="What does the strongest source actually show?"></textarea>
+          </div>
+          <div class="field">
+            <label for="mechanism">Mechanism</label>
+            <textarea id="mechanism" placeholder="How or why does the process occur?"></textarea>
+          </div>
+          <div class="field">
+            <label for="significance">Scientific significance</label>
+            <textarea id="significance" placeholder="What changes in understanding, research or practice?"></textarea>
+          </div>
+          <div class="field">
+            <label for="uncertainty">Limitations and uncertainty</label>
+            <textarea id="uncertainty" placeholder="What does the evidence not establish?"></textarea>
+          </div>
+          <div class="field">
+            <label for="expert-voice">Verified expert perspective (optional)</label>
+            <textarea id="expert-voice" placeholder="Paste a checked quotation or faithful attributed summary."></textarea>
+          </div>
+        </div>
+        <div class="action-row">
+          <button class="secondary next" data-next="references" type="button">Continue to references</button>
+        </div>
+      </section>
+
+      <section id="panel-references" class="panel">
+        <div class="panel-head">
+          <p class="eyebrow">APA 7 source records</p>
+          <h2>Add at least two references</h2>
+          <p>Enter authors as <strong>Family, Given names</strong>, separated by semicolons. Formatting does not verify that a source exists.</p>
+        </div>
+
+        <div class="reference-form">
+          <div class="two grid">
+            <div class="field">
+              <label for="ref-kind">Reference type</label>
+              <select id="ref-kind">
+                <option value="journal">Journal article</option>
+                <option value="magazine">Magazine article</option>
+                <option value="webpage">Webpage</option>
+                <option value="report">Report</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ref-year">Year</label>
+              <input id="ref-year" placeholder="2026 or n.d." />
+            </div>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="ref-authors">Authors</label>
+            <input id="ref-authors" placeholder="Singh, Rajesh Kumar; Patel, Amit" />
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="ref-title">Article, page or report title</label>
+            <input id="ref-title" placeholder="Enter the title in sentence case" />
+          </div>
+          <div class="two grid" style="margin-top:12px">
+            <div class="field">
+              <label for="ref-source">Journal, magazine or website</label>
+              <input id="ref-source" />
+            </div>
+            <div class="field">
+              <label for="ref-date">Month and day, if required</label>
+              <input id="ref-date" placeholder="September 3" />
+            </div>
+          </div>
+          <div class="three grid" style="margin-top:12px">
+            <div class="field"><label for="ref-volume">Volume</label><input id="ref-volume" /></div>
+            <div class="field"><label for="ref-issue">Issue</label><input id="ref-issue" /></div>
+            <div class="field"><label for="ref-pages">Pages/article no.</label><input id="ref-pages" /></div>
+          </div>
+          <div class="two grid" style="margin-top:12px">
+            <div class="field"><label for="ref-publisher">Publisher, for reports</label><input id="ref-publisher" /></div>
+            <div class="field"><label for="ref-link">DOI or URL</label><input id="ref-link" placeholder="10.xxxx/... or https://..." /></div>
+          </div>
+          <div class="action-row">
+            <button id="add-reference" class="secondary" type="button">Format and add reference</button>
+          </div>
+          <p id="reference-status" class="status"></p>
+        </div>
+
+        <div id="reference-list" class="reference-list"></div>
+
+        <div class="gate">
+          <h3>Send the complete plan to ChatGPT</h3>
+          <p>ChatGPT will research the current angle, verify claim–source support, write in the selected high-level framework, check APA 7 and return the finished article to this UI.</p>
+          <div class="action-row">
+            <button id="write-with-chatgpt" class="primary" type="button">Research and write in chat</button>
+          </div>
+          <p id="request-status" class="status"></p>
+        </div>
+      </section>
+
+      <section id="panel-draft" class="panel">
+        <div class="panel-head">
+          <p class="eyebrow">Referenced article</p>
+          <h2 id="draft-title">Draft output</h2>
+          <p id="draft-framework">The finished article will appear here after ChatGPT completes the research and drafting workflow.</p>
+        </div>
+        <div class="action-row" style="margin-top:0;margin-bottom:14px">
+          <button id="copy-article" class="secondary" type="button" disabled>Copy</button>
+          <button id="download-article" class="secondary" type="button" disabled>Download Word file</button>
+        </div>
+        <article id="article" class="article">
+          <div class="article-empty">Prepare the brief and continue in chat. ChatGPT will return the checked article here.</div>
+        </article>
+        <div id="verification-notes" class="notes hidden"></div>
+      </section>
+    </main>
+
+    <script type="module">
+      const state = {
+        suggestions: [],
+        authors: [],
+        selectedTitle: "",
+        authorId: "blend",
+        references: [],
+        article: "",
+        articleReferences: []
+      };
+
+      const byId = (id) => document.getElementById(id);
+      const value = (id) => byId(id).value.trim();
+      const escapeHtml = (text) => String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+      const inlineHtml = (text) => escapeHtml(text).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
+      function setStatus(id, message, type) {
+        const el = byId(id);
+        el.textContent = message || "";
+        el.className = "status" + (type ? " " + type : "");
+      }
+
+      function selectTab(name) {
+        document.querySelectorAll(".tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.tab === name));
+        document.querySelectorAll(".panel").forEach((panel) => panel.classList.toggle("active", panel.id === "panel-" + name));
+        notifySize();
+      }
+
+      document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => selectTab(tab.dataset.tab)));
+      document.querySelectorAll(".next").forEach((button) => button.addEventListener("click", () => selectTab(button.dataset.next)));
+
+      function hydrateBrief(brief) {
+        if (!brief) return;
+        const mappings = {
+          subject: "subject",
+          field: "field",
+          audience: "audience",
+          articleForm: "article-form",
+          trend: "trend",
+          whyNow: "why-now",
+          targetWords: "target-words"
+        };
+        Object.entries(mappings).forEach(([key, id]) => {
+          if (brief[key] !== undefined && brief[key] !== "") byId(id).value = brief[key];
+        });
+      }
+
+      function renderAuthors() {
+        const select = byId("author");
+        select.innerHTML = "";
+        state.authors.forEach((author) => {
+          const option = document.createElement("option");
+          option.value = author.id;
+          option.textContent = author.name + " · " + author.framework;
+          select.appendChild(option);
+        });
+        select.value = state.authorId;
+        byId("author-section").classList.toggle("hidden", !state.authors.length);
+        renderFramework();
+      }
+
+      function renderFramework() {
+        const author = state.authors.find((item) => item.id === state.authorId);
+        if (!author) return;
+        byId("framework").innerHTML =
+          "<h3>" + escapeHtml(author.name) + " — " + escapeHtml(author.framework) + "</h3>" +
+          "<p>" + escapeHtml(author.bestFor) + "</p>" +
+          "<ul>" + author.rules.map((rule) => "<li>" + escapeHtml(rule) + "</li>").join("") + "</ul>" +
+          "<p style='border-top:1px solid rgba(255,255,255,.16);padding-top:10px'>High-level narrative framework only; all wording remains original.</p>";
+      }
+
+      function renderTitles() {
+        const container = byId("titles");
+        container.innerHTML = "";
+        state.suggestions.forEach((suggestion) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "title-card" + (state.selectedTitle === suggestion.title ? " selected" : "");
+          button.innerHTML =
+            "<strong>" + escapeHtml(suggestion.title) + "</strong>" +
+            "<span>" + escapeHtml(suggestion.rationale) + "</span>" +
+            "<em>Best fit: " + escapeHtml(suggestion.authorName) + "</em>";
+          button.addEventListener("click", () => {
+            state.selectedTitle = suggestion.title;
+            state.authorId = suggestion.authorId;
+            renderTitles();
+            renderAuthors();
+          });
+          container.appendChild(button);
+        });
+        notifySize();
+      }
+
+      byId("author").addEventListener("change", (event) => {
+        state.authorId = event.target.value;
+        renderFramework();
+      });
+
+      function referenceInput() {
+        return {
+          kind: value("ref-kind"),
+          authors: value("ref-authors"),
+          year: value("ref-year"),
+          fullDate: value("ref-date") || undefined,
+          title: value("ref-title"),
+          source: value("ref-source") || undefined,
+          volume: value("ref-volume") || undefined,
+          issue: value("ref-issue") || undefined,
+          pages: value("ref-pages") || undefined,
+          doiOrUrl: value("ref-link") || undefined,
+          publisher: value("ref-publisher") || undefined
+        };
+      }
+
+      function clearReferenceForm() {
+        ["ref-authors", "ref-year", "ref-date", "ref-title", "ref-source", "ref-volume", "ref-issue", "ref-pages", "ref-link", "ref-publisher"]
+          .forEach((id) => { byId(id).value = ""; });
+      }
+
+      function renderReferences() {
+        const container = byId("reference-list");
+        container.innerHTML = "";
+        state.references.forEach((item, index) => {
+          const row = document.createElement("div");
+          row.className = "reference-row";
+          row.innerHTML =
+            "<p class='reference-preview'>" + inlineHtml(item.formatted) + "</p>" +
+            "<button class='icon-button' type='button' aria-label='Remove reference'>×</button>";
+          row.querySelector("button").addEventListener("click", () => {
+            state.references.splice(index, 1);
+            renderReferences();
+          });
+          container.appendChild(row);
+        });
+        notifySize();
+      }
+
+      function getPlan() {
+        return {
+          subject: value("subject"),
+          field: value("field"),
+          audience: value("audience"),
+          articleForm: value("article-form"),
+          trend: value("trend"),
+          whyNow: value("why-now"),
+          targetWords: Number(value("target-words") || 1000),
+          selectedTitle: state.selectedTitle,
+          authorId: state.authorId,
+          evidence: {
+            finding: value("finding"),
+            mechanism: value("mechanism"),
+            significance: value("significance"),
+            uncertainty: value("uncertainty"),
+            expertVoice: value("expert-voice") || undefined
+          },
+          references: state.references.map((item) => item.reference)
+        };
+      }
+
+      function planErrors(plan) {
+        const errors = [];
+        if (plan.subject.length < 2) errors.push("scientific subject");
+        if (!plan.selectedTitle) errors.push("selected title");
+        if (plan.whyNow.length < 10) errors.push("why-now statement");
+        ["finding", "mechanism", "significance", "uncertainty"].forEach((key) => {
+          if ((plan.evidence[key] || "").length < 10) errors.push(key);
+        });
+        if (plan.references.length < 2) errors.push("at least two references");
+        return errors;
+      }
+
+      function renderArticle(result) {
+        state.article = result.article || "";
+        state.articleReferences = result.references || [];
+        byId("draft-title").textContent = result.title || "Draft output";
+        byId("draft-framework").textContent = result.authorFramework || "";
+        const blocks = state.article.split(/\n{2,}/).filter(Boolean);
+        let html = blocks.map((block) => {
+          if (block.startsWith("# ")) return "<h1>" + inlineHtml(block.slice(2)) + "</h1>";
+          if (block.startsWith("## ")) return "<h2>" + inlineHtml(block.slice(3)) + "</h2>";
+          return "<p>" + inlineHtml(block.replace(/\n/g, " ")) + "</p>";
+        }).join("");
+        if (state.articleReferences.length) {
+          html += "<h2>References</h2>" + state.articleReferences.map((reference) =>
+            "<p class='reference'>" + inlineHtml(reference) + "</p>"
+          ).join("");
+        }
+        byId("article").innerHTML = html || "<div class='article-empty'>No article content was returned.</div>";
+        byId("copy-article").disabled = !state.article;
+        byId("download-article").disabled = !state.article;
+        const notes = result.verificationNotes || [];
+        byId("verification-notes").classList.toggle("hidden", !notes.length);
+        byId("verification-notes").innerHTML = notes.length
+          ? "<strong>Verification notes</strong><ul>" + notes.map((note) => "<li>" + escapeHtml(note) + "</li>").join("") + "</ul>"
+          : "";
+        selectTab("draft");
+      }
+
+      function updateFromResponse(response) {
+        const data = response && response.structuredContent;
+        if (!data) return;
+        if (data.brief) hydrateBrief(data.brief);
+        if (data.authors) {
+          state.authors = data.authors;
+          if (!state.authorId || !state.authors.some((item) => item.id === state.authorId)) state.authorId = "blend";
+          renderAuthors();
+        }
+        if (data.suggestions) {
+          state.suggestions = data.suggestions;
+          if (!state.selectedTitle && state.suggestions.length) {
+            state.selectedTitle = state.suggestions[0].title;
+            state.authorId = state.suggestions[0].authorId;
+          }
+          renderTitles();
+          renderAuthors();
+        }
+        if (data.view === "article") renderArticle(data);
+      }
+
+      let rpcId = 0;
+      let bridgeReady = false;
+      const pending = new Map();
+
+      function rpcRequest(method, params) {
+        return new Promise((resolve, reject) => {
+          const id = ++rpcId;
+          pending.set(id, { resolve, reject });
+          window.parent.postMessage({ jsonrpc: "2.0", id, method, params }, "*");
+        });
+      }
+
+      function rpcNotify(method, params) {
+        window.parent.postMessage({ jsonrpc: "2.0", method, params }, "*");
+      }
+
+      window.addEventListener("message", (event) => {
+        if (event.source !== window.parent) return;
+        const message = event.data;
+        if (!message || message.jsonrpc !== "2.0") return;
+        if (message.id !== undefined) {
+          const request = pending.get(message.id);
+          if (!request) return;
+          pending.delete(message.id);
+          if (message.error) request.reject(message.error);
+          else request.resolve(message.result);
+          return;
+        }
+        if (message.method === "ui/notifications/tool-result") updateFromResponse(message.params);
+        if (message.method === "ui/notifications/tool-input") hydrateBrief(message.params && message.params.arguments);
+      }, { passive: true });
+
+      async function initializeBridge() {
+        try {
+          await rpcRequest("ui/initialize", {
+            appInfo: { name: "agro-popular-science-writer", version: "0.1.0" },
+            appCapabilities: {},
+            protocolVersion: "2026-01-26"
+          });
+          rpcNotify("ui/notifications/initialized", {});
+          bridgeReady = true;
+          if (window.openai && window.openai.toolOutput) updateFromResponse(window.openai.toolOutput);
+        } catch (error) {
+          console.error("MCP Apps bridge initialization failed", error);
+        }
+      }
+
+      async function callTool(name, args) {
+        if (!bridgeReady) await bridge;
+        const result = await rpcRequest("tools/call", { name, arguments: args });
+        updateFromResponse(result);
+        return result;
+      }
+
+      const bridge = initializeBridge();
+
+      byId("suggest-titles").addEventListener("click", async () => {
+        const subject = value("subject");
+        if (subject.length < 2) {
+          setStatus("title-status", "Enter the scientific subject first.", "error");
+          return;
+        }
+        setStatus("title-status", "Preparing title options…");
+        try {
+          await callTool("suggest_titles", {
+            subject,
+            trend: value("trend"),
+            whyNow: value("why-now") || undefined
+          });
+          setStatus("title-status", "Select a title, then accept or change its recommended framework.", "success");
+        } catch (error) {
+          setStatus("title-status", "Could not generate titles. Please try again.", "error");
+        }
+      });
+
+      byId("add-reference").addEventListener("click", async () => {
+        const reference = referenceInput();
+        if (!reference.authors || !reference.year || !reference.title) {
+          setStatus("reference-status", "Author, year and title are required.", "error");
+          return;
+        }
+        setStatus("reference-status", "Formatting APA 7 record…");
+        try {
+          const result = await callTool("format_apa7_reference", reference);
+          const data = result.structuredContent;
+          state.references.push({
+            reference: data.reference,
+            formatted: data.formatted,
+            inText: data.inText,
+            warnings: data.warnings || []
+          });
+          renderReferences();
+          clearReferenceForm();
+          setStatus(
+            "reference-status",
+            data.warnings && data.warnings.length
+              ? "Added with warning: " + data.warnings.join(" ")
+              : "Reference formatted and added. Verify it against the original source.",
+            data.warnings && data.warnings.length ? "error" : "success"
+          );
+        } catch (error) {
+          setStatus("reference-status", "The reference could not be formatted. Check the required fields.", "error");
+        }
+      });
+
+      byId("write-with-chatgpt").addEventListener("click", async () => {
+        const plan = getPlan();
+        const errors = planErrors(plan);
+        if (errors.length) {
+          setStatus("request-status", "Complete: " + errors.join(", ") + ".", "error");
+          return;
+        }
+        setStatus("request-status", "Preparing the brief and handing it to ChatGPT…");
+        try {
+          const result = await callTool("prepare_article_request", plan);
+          const articleRequest = result.structuredContent.articleRequest;
+          try {
+            await rpcRequest("ui/update-model-context", {
+              content: [{
+                type: "text",
+                text: "The user prepared a complete Agro Popular Science Writer brief in the interactive UI."
+              }],
+              structuredContent: { articleRequest }
+            });
+          } catch (contextError) {
+            console.warn("Model context update was unavailable", contextError);
+          }
+          await rpcRequest("ui/message", {
+            role: "user",
+            content: [{
+              type: "text",
+              text: "Use the prepared Agro Popular Science Writer brief now. Research and verify the current angle and sources, build a claim-to-source evidence map, draft the complete article in the selected high-level framework with original wording and APA 7 citations, then call render_article so the result appears in the UI."
+            }]
+          });
+          setStatus("request-status", "Sent to ChatGPT. Continue in the conversation while research and drafting are completed.", "success");
+          selectTab("draft");
+        } catch (error) {
+          setStatus("request-status", "The brief could not be sent. Check all fields and try again.", "error");
+        }
+      });
+
+      byId("fullscreen").addEventListener("click", async () => {
+        try { await rpcRequest("ui/request-display-mode", { mode: "fullscreen" }); }
+        catch (error) { console.warn("Fullscreen is not available", error); }
+      });
+
+      byId("open-site").addEventListener("click", async () => {
+        try {
+          await rpcRequest("ui/open-link", {
+            url: "https://agro-popular-science-writer.vkcvaibhav.chatgpt.site"
+          });
+        } catch (error) {
+          window.open("https://agro-popular-science-writer.vkcvaibhav.chatgpt.site", "_blank", "noopener");
+        }
+      });
+
+      byId("copy-article").addEventListener("click", async () => {
+        const text = state.article + (state.articleReferences.length ? "\n\nReferences\n\n" + state.articleReferences.join("\n\n") : "");
+        try {
+          await navigator.clipboard.writeText(text.replace(/\*/g, ""));
+          byId("copy-article").textContent = "Copied";
+          setTimeout(() => { byId("copy-article").textContent = "Copy"; }, 1600);
+        } catch (error) {
+          console.error("Copy failed", error);
+        }
+      });
+
+      byId("download-article").addEventListener("click", () => {
+        const title = byId("draft-title").textContent || "Popular science article";
+        const body = byId("article").innerHTML;
+        const html =
+          "<!doctype html><html><head><meta charset='utf-8'><title>" + escapeHtml(title) + "</title>" +
+          "<style>body{font-family:Georgia,serif;max-width:760px;margin:48px auto;line-height:1.65;color:#17231d}" +
+          "h1{font-size:30px}h2{font:700 18px Arial,sans-serif;margin-top:28px}.reference{margin-left:36px;text-indent:-36px}em{font-style:italic}</style>" +
+          "</head><body>" + body + "</body></html>";
+        const url = URL.createObjectURL(new Blob([html], { type: "application/msword" }));
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 60) + ".doc";
+        anchor.click();
+        URL.revokeObjectURL(url);
+      });
+
+      function notifySize() {
+        if (!bridgeReady) return;
+        const height = Math.ceil(document.documentElement.getBoundingClientRect().height);
+        rpcNotify("ui/notifications/size-changed", { width: window.innerWidth, height });
+      }
+
+      new ResizeObserver(notifySize).observe(document.body);
+    </script>
+  </body>
+</html>

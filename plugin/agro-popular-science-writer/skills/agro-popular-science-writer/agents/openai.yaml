@@ -1,0 +1,16 @@
+interface:
+  display_name: "Agro Popular Science Writer"
+  short_description: "Evidence-led articles with APA 7 references"
+  brand_color: "#0F5A3F"
+  default_prompt: "Use $agro-popular-science-writer to plan a referenced agricultural popular-science article."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "agro-popular-science-writer"
+      description: "Interactive writer workspace, APA formatter, and article renderer"
+      transport: "streamable_http"
+      url: "https://agro-popular-science-writer.vkcvaibhav.chatgpt.site/mcp"
+
+policy:
+  allow_implicit_invocation: true
