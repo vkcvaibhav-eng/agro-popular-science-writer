@@ -29,7 +29,18 @@ import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 
-type AuthorId = "pearson" | "stokstad" | "milius" | "simon" | "jarvis" | "blend";
+type AuthorId =
+  | "pearson"
+  | "stokstad"
+  | "milius"
+  | "simon"
+  | "jarvis"
+  | "milman"
+  | "popkin"
+  | "arnold"
+  | "goulson"
+  | "charles"
+  | "blend";
 type ReferenceKind = "journal" | "magazine" | "webpage" | "report";
 
 type Brief = {
@@ -146,6 +157,71 @@ const AUTHORS: Array<{
     sections: ["The revealing moment", "The widening circle", "What is at stake"],
   },
   {
+    id: "milman",
+    name: "Oliver Milman",
+    framework: "Threat-to-consequence environmental reporting",
+    bestFor: "Insect decline, pesticides, climate pressure and conservation stories with measurable urgency.",
+    rules: [
+      "Lead with a documented change or evidence-backed threat.",
+      "Trace consequences from the organism to ecosystems and people.",
+      "Represent competing explanations and realistic responses.",
+      "Create urgency from evidence, not unsupported catastrophe.",
+    ],
+    sections: ["The warning signal", "Following the consequences", "What a response requires"],
+  },
+  {
+    id: "popkin",
+    name: "Gabriel Popkin",
+    framework: "Landscape-to-system science narrative",
+    bestFor: "Field ecology, soils, forests, climate and research that connects observations across scales.",
+    rules: [
+      "Anchor the story in a concrete observation or measurement.",
+      "Move deliberately from plot or organism to landscape and system.",
+      "Show how scientific methods reveal otherwise hidden connections.",
+      "End with the larger implication and its remaining uncertainty.",
+    ],
+    sections: ["A signal in the field", "Across scales", "The larger system"],
+  },
+  {
+    id: "arnold",
+    name: "Carrie Arnold",
+    framework: "Scientific mystery and evidence trail",
+    bestFor: "Unexplained outbreaks, competing hypotheses, disease ecology and evidence that changes direction.",
+    rules: [
+      "Begin with a clearly defined scientific puzzle.",
+      "Follow the evidence as a sequence of testable clues.",
+      "Show how competing hypotheses are supported or eliminated.",
+      "Resolve only what the evidence allows and leave the open question visible.",
+    ],
+    sections: ["The puzzle", "Following the evidence", "What the clues can support"],
+  },
+  {
+    id: "goulson",
+    name: "Dave Goulson",
+    framework: "Accessible ecology and conservation",
+    bestFor: "Pollinators, pesticides, gardens, natural history and practical conservation implications.",
+    rules: [
+      "Begin with a familiar organism or ecological encounter.",
+      "Explain interdependence in clear, concrete language.",
+      "Connect evidence to practical choices without preaching.",
+      "Close with a feasible implication supported by the science.",
+    ],
+    sections: ["The familiar encounter", "The web of dependence", "What the evidence makes possible"],
+  },
+  {
+    id: "charles",
+    name: "Dan Charles",
+    framework: "People-centred agricultural reporting",
+    bestFor: "Food systems, agricultural decisions, technology adoption and evidence with practical trade-offs.",
+    rules: [
+      "Open with a real decision or trade-off created by the subject.",
+      "Translate methods and results into practical stakes.",
+      "Represent benefits, costs and affected perspectives fairly.",
+      "Close with what the evidence can and cannot justify in practice.",
+    ],
+    sections: ["The decision", "Evidence in practice", "The trade-off that remains"],
+  },
+  {
     id: "blend",
     name: "Original editorial blend",
     framework: "Scene, evidence and explanation",
@@ -159,6 +235,10 @@ const AUTHORS: Array<{
     sections: ["The question", "How the evidence fits", "Why it matters now"],
   },
 ];
+
+function authorById(id: AuthorId) {
+  return AUTHORS.find((author) => author.id === id) ?? AUTHORS[AUTHORS.length - 1];
+}
 
 const DEFAULT_BRIEF: Brief = {
   subject: "Mites as hidden drivers of crop stress",
@@ -199,6 +279,11 @@ function subjectLabel(subject: string) {
 
 function recommendAuthor(title: string, trend: string): AuthorId {
   const text = (title + " " + trend).toLowerCase();
+  if (/(pollinat|bumblebee|\bbee\b|garden|pesticide|conservation)/.test(text)) return "goulson";
+  if (/(food system|food security|agricultur|farm|adoption|market|consumer|trade-off|practice)/.test(text)) return "charles";
+  if (/(mystery|clue|puzzle|outbreak|diagnos|unexplained|investigat)/.test(text)) return "arnold";
+  if (/(landscape|soil|forest|carbon|remote sensing|across scales|global system)/.test(text)) return "popkin";
+  if (/(decline|extinction|crisis|threat|vanish|collapse)/.test(text)) return "milman";
   if (/(disappear|ecolog|biodiversity|cost|future|food system|at stake)/.test(text)) return "jarvis";
   if (/(inside|how |mechanism|cascade|warmer|climate|technology|detection)/.test(text)) return "simon";
   if (/(surpris|strange|odd|paradox|tiny|secret)/.test(text)) return "milius";
@@ -400,6 +485,21 @@ function openingFor(author: AuthorId, brief: Brief, evidence: Evidence, citation
     jarvis:
       "At first, " + subject + " can seem like a narrow scientific concern. Stay with the evidence, however, and a wider story appears—one that connects living systems, human choices and uncertain futures. " +
       signal + " " + citations,
+    milman:
+      "The warning is measurable, not rhetorical. " + signal + " The documented signal is " +
+      finding + " " + citations + " Following that signal reveals who and what may carry the consequences.",
+    popkin:
+      "A single observation of " + subject + " can expose a process operating far beyond its immediate scale. " +
+      finding + " " + citations + " The task is to follow that connection without losing sight of how it was measured.",
+    arnold:
+      "The story begins with a scientific puzzle: what can explain the changing evidence around " + subject + "? " +
+      finding + " " + citations + " Each result is a clue, but no clue should be asked to prove more than it can.",
+    goulson:
+      subject + " belongs to a web of ordinary ecological relationships that is easy to overlook. " +
+      finding + " " + citations + " Understanding those connections is the first step toward judging what action the evidence supports.",
+    charles:
+      "The science of " + subject + " creates a practical decision, not merely an abstract question. " +
+      finding + " " + citations + " The significance lies in how evidence changes the available choices and their trade-offs.",
     blend:
       signal + " At the centre of the story is a finding that is both specific and consequential: " +
       finding + " " + citations,
@@ -419,6 +519,16 @@ function closingFor(author: AuthorId, subject: string, uncertainty: string) {
       "Once the mechanism is visible, the wider consequence is harder to ignore. But a plausible chain is not the same as a completed one. " + uncertainty,
     jarvis:
       "The story ends where observation begins again: with a system still changing and with consequences that resist a simple conclusion. " + uncertainty,
+    milman:
+      "The warning deserves attention because its consequences can be traced, not because the future is predetermined. What happens next depends on evidence, choices and the limits that remain. " + uncertainty,
+    popkin:
+      "A single measurement becomes meaningful when its place in the larger system is visible. The remaining task is to learn where that connection holds and where scale changes the answer. " + uncertainty,
+    arnold:
+      "The evidence resolves part of the mystery, but not all of it. The unanswered clue is therefore a research direction rather than a gap to disguise. " + uncertainty,
+    goulson:
+      "The ecological connection is close enough to observe and important enough to protect, but any response should remain proportionate to the evidence. " + uncertainty,
+    charles:
+      "The science clarifies the trade-off without making the decision automatic. Its practical value depends on where the result holds, who carries the cost and what remains uncertain. " + uncertainty,
     blend:
       "The evidence makes the subject clearer, not simpler. " + uncertainty + " That boundary between what is known and what remains open is part of the story.",
   };
@@ -432,7 +542,7 @@ function buildDraft(
   authorId: AuthorId,
   references: ReferenceRecord[],
 ) {
-  const author = AUTHORS.find((item) => item.id === authorId) || AUTHORS[5];
+  const author = authorById(authorId);
   const citations = citationCluster(references);
   const subject = subjectLabel(brief.subject);
   const finding = evidence.finding.trim();
@@ -511,8 +621,8 @@ export default function Home() {
   const [draft, setDraft] = useState("");
   const [copied, setCopied] = useState(false);
   const [requestCopied, setRequestCopied] = useState(false);
-  const activeAuthor = AUTHORS.find((author) => author.id === selectedAuthor) || AUTHORS[5];
-  const recommendation = AUTHORS.find((author) => author.id === recommendedAuthor) || AUTHORS[5];
+  const activeAuthor = authorById(selectedAuthor);
+  const recommendation = authorById(recommendedAuthor);
   const referenceFormErrors = referenceErrors({ ...referenceForm, id: "draft" });
   const allReferencesValid = references.length > 0 && references.every((reference) => referenceErrors(reference).length === 0);
   const canDraft =
@@ -607,6 +717,9 @@ export default function Home() {
       "- Use author–date citations and at least five substantive references.",
       "- Verify every bibliographic field and format the reference list in exact APA 7 style.",
       "- State meaningful limitations and never invent evidence, quotations, DOIs or metadata.",
+      "",
+      "Selected framework rules:",
+      ...activeAuthor.rules.map((rule) => "- " + rule),
       suppliedEvidence.length ? "" : "",
       suppliedEvidence.length ? "Evidence already supplied (verify it):" : "",
       ...suppliedEvidence.map((item) => "- " + item),
@@ -954,7 +1067,7 @@ export default function Home() {
 
               <div className="grid gap-3">
                 {suggestions.map((suggestion) => {
-                  const author = AUTHORS.find((item) => item.id === suggestion.author) || AUTHORS[5];
+                  const author = authorById(suggestion.author);
                   const selected = selectedTitle === suggestion.title;
                   return (
                     <button
@@ -993,7 +1106,7 @@ export default function Home() {
               </div>
 
               <div className="mt-5">
-                <Field label="Selected author framework" hint="The recommendation is automatic; you may override it.">
+                <Field label="Selected author framework" hint="All ten selected authors are available; you may override the automatic recommendation.">
                   <Select value={selectedAuthor} onValueChange={(value) => { setSelectedAuthor(value as AuthorId); setDraft(""); }}>
                     <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
                     <SelectContent>

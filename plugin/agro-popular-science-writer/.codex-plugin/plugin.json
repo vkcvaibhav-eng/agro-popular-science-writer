@@ -1,6 +1,6 @@
 {
   "name": "agro-popular-science-writer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A chat-first skill for researching, drafting and reviewing referenced agricultural popular-science articles.",
   "author": {
     "name": "Vaibhav K. Chaudhari",
@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "Agro Popular Science Writer",
     "shortDescription": "Referenced agricultural popular-science writing",
-    "longDescription": "A subject-first writing skill that researches evidence, suggests timely titles, recommends an editorial framework, verifies APA 7 references and produces an original agricultural popular-science article directly in chat.",
+    "longDescription": "A subject-first writing skill that researches evidence, suggests timely titles, recommends among ten author-informed editorial frameworks, verifies APA 7 references and produces an original agricultural popular-science article directly in chat.",
     "developerName": "Vaibhav K. Chaudhari",
     "category": "Education",
     "capabilities": ["Research", "Write"],

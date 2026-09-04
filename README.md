@@ -11,7 +11,7 @@ The project supports two complementary interfaces:
 
 - Starts with the scientific subject, field, audience, article form and current trend angle—without region or location targeting.
 - Suggests six subject-first popular-science titles and recommends the best-fit author framework for each title.
-- Lets the editor override the recommendation and review the strict rules for every framework.
+- Lets the editor choose among all ten selected author frameworks, override the recommendation and review the strict rules for every framework.
 - Requires a central finding, mechanism, significance, uncertainty and at least two complete references before drafting.
 - Formats journal articles, magazine articles, webpages and reports in APA 7 structure, including DOI normalization, italics and hanging indents.
 - Builds in-text citations from the supplied references and does not invent missing evidence or quotations.
@@ -24,6 +24,11 @@ The project supports two complementary interfaces:
 - Susan Milius: compact, surprising science
 - Matt Simon: mechanism in motion
 - Brooke Jarvis: immersive ecological narrative
+- Oliver Milman: threat-to-consequence environmental reporting
+- Gabriel Popkin: landscape-to-system science narrative
+- Carrie Arnold: scientific mystery and evidence trail
+- Dave Goulson: accessible ecology and conservation
+- Dan Charles: people-centred agricultural reporting
 - Original editorial blend: scene + evidence + explanation
 
 The frameworks apply analysed, high-level narrative architecture while preserving original wording. They do not reproduce signature phrases or imitate an author's exact voice.

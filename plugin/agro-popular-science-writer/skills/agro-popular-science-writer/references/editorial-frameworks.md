@@ -47,6 +47,51 @@ Best for biodiversity, disappearance, human–nature relationships, and layered 
 - Keep organisms, people, and uncertainty within the same narrative frame.
 - End with resonance rather than a simplified solution.
 
+## Oliver Milman — threat-to-consequence environmental reporting
+
+Best for insect decline, pesticides, climate pressure, and conservation stories with measurable urgency.
+
+- Lead with a documented change or evidence-backed threat.
+- Trace consequences from the organism to ecosystems and people.
+- Represent competing explanations and realistic responses.
+- Create urgency from evidence, not unsupported catastrophe.
+
+## Gabriel Popkin — landscape-to-system science narrative
+
+Best for field ecology, soils, forests, climate, and research that connects observations across scales.
+
+- Anchor the story in a concrete observation or measurement.
+- Move deliberately from plot or organism to landscape and system.
+- Show how scientific methods reveal otherwise hidden connections.
+- End with the larger implication and its remaining uncertainty.
+
+## Carrie Arnold — scientific mystery and evidence trail
+
+Best for unexplained outbreaks, competing hypotheses, disease ecology, and evidence that changes direction.
+
+- Begin with a clearly defined scientific puzzle.
+- Follow the evidence as a sequence of testable clues.
+- Show how competing hypotheses are supported or eliminated.
+- Resolve only what the evidence allows and leave the open question visible.
+
+## Dave Goulson — accessible ecology and conservation
+
+Best for pollinators, pesticides, gardens, natural history, and practical conservation implications.
+
+- Begin with a familiar organism or ecological encounter.
+- Explain interdependence in clear, concrete language.
+- Connect evidence to practical choices without preaching.
+- Close with a feasible implication supported by the science.
+
+## Dan Charles — people-centred agricultural reporting
+
+Best for food systems, agricultural decisions, technology adoption, and evidence with practical trade-offs.
+
+- Open with a real decision or trade-off created by the subject.
+- Translate methods and results into practical stakes.
+- Represent benefits, costs, and affected perspectives fairly.
+- Close with what the evidence can and cannot justify in practice.
+
 ## Original editorial blend
 
 Best when no named framework clearly fits.
@@ -58,4 +103,4 @@ Best when no named framework clearly fits.
 
 ## Selection rule
 
-Recommend the framework that best serves the title and evidence, not the most famous author. Explain the recommendation in one sentence and preserve the user's final choice.
+Consider all ten named frameworks before recommending the one that best serves the title and evidence. Do not default to the most famous author or restrict the choice to the first five. Explain the recommendation in one sentence and preserve the user's final choice. Use the original editorial blend only when no named framework clearly fits or the user selects it.
