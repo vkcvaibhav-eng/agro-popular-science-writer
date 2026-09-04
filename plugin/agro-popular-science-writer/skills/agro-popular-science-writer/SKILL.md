@@ -1,6 +1,6 @@
 ---
 name: agro-popular-science-writer
-description: Plan, research, draft, revise, and review evidence-led agricultural popular-science articles with timely subject-first titles, selectable editorial frameworks, in-text citations, and exact APA 7 references. Use whenever the user asks for an English popular article, magazine article, trending agricultural-science titles, an author-framework recommendation, or APA 7 reference checking about agricultural organisms, processes, discoveries, technologies, ecology, crop protection, food systems, or related research. Do not use for unreferenced promotional copy.
+description: Plan, research, draft, revise, audit, and score evidence-led agricultural popular-science articles with timely subject-first titles, selectable editorial frameworks, in-text citations, and exact APA 7 references. Use whenever the user asks for an English popular article, magazine article, trending agricultural-science titles, an author-framework recommendation, framework-alignment review, or APA 7 reference checking about agricultural organisms, processes, discoveries, technologies, ecology, crop protection, food systems, or related research. Do not use for unreferenced promotional copy.
 ---
 
 # Agro Popular Science Writer
@@ -21,7 +21,10 @@ Work in stages so the user selects the story before a full article is written.
 6. **Reference verification.** Read [apa7.md](references/apa7.md). Open the original publisher, DOI, journal, institutional or bibliographic pages and verify author order, date, title, source, volume, issue, pages or article number, and DOI/URL. A search-result snippet is not sufficient proof of metadata.
 7. **Draft.** Write in clear English for the selected audience. Apply the selected framework consistently while keeping every sentence original. Use descriptive headings only when the target publication permits them. Keep claims proportionate to the evidence and include meaningful limitations.
 8. **Citation audit.** Include author–date citations for factual scientific claims and a complete alphabetized APA 7 reference list. Match every in-text citation to one reference entry and every listed reference to at least one claim.
-9. **Editorial review.** Check title accuracy, evidence coverage, terminology, scientific-name italics, uncertainty, requested length, APA punctuation and italicization. Correct the draft before presenting it.
+9. **Selected-framework editor.** Read [editorial-audit.md](references/editorial-audit.md). Act as a rigorous editor applying the selected author's high-level framework without impersonating the author. Check the draft against every framework rule plus title accuracy, evidence coverage, terminology, scientific-name italics, uncertainty, requested length, APA punctuation and italicization.
+10. **Targeted revision.** Rewrite weak sections identified by the audit. Preserve verified facts and citations while improving the opening, sentence construction, narrative flow, technical explanation, research translation, relevance and ending.
+11. **Final fact lock.** Recheck the revised article against the evidence map and original-source metadata. Correct any claim drift, unsupported inference, citation mismatch or APA error introduced during revision.
+12. **Final presentation and score.** Show the complete revised article in chat, then score its alignment with the selected framework using the 100-point rubric in [editorial-audit.md](references/editorial-audit.md). Give an observable reason for every score and do not inflate the result.
 
 ## Title-desk format
 
@@ -34,13 +37,14 @@ Place source links immediately below the table. State explicitly when no current
 
 ## Article output
 
-Present the completed article in this order:
+Present the completed work in this order:
 
-1. Selected title.
-2. Article body with author–date citations.
+1. `## Final article` followed by the selected title.
+2. Revised article body with author–date citations.
 3. A short “What remains uncertain” passage when limitations are material.
 4. **References** in alphabetical APA 7 order.
 5. A brief verification note listing any bibliographic field that could not be confirmed from an original source.
+6. `## Editorial audit — [selected author and framework]` with the eight-category score table, total out of 100, rating band and concise editorial verdict required by [editorial-audit.md](references/editorial-audit.md).
 
 ## Non-imitation boundary
 

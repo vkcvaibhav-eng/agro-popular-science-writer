@@ -20,50 +20,50 @@ Best for new studies, field trials, policy consequences, and research news.
 - Separate reported evidence from interpretation.
 - Close with the next research or policy question.
 
-## Susan Milius — compact biological surprise
+## Susan Milius — compact biological action and surprise
 
 Best for counterintuitive findings and tightly focused biological features.
 
-- Lead with one defensible contradiction or surprise.
+- Lead with one defensible biological action, contradiction, or surprise.
 - Keep paragraphs compact and concrete.
-- Explain one central idea rather than surveying the entire field.
+- Let the behaviour or mechanism unfold as a clear sequence.
 - End with the most informative unresolved question.
 
-## Matt Simon — mechanism in motion
+## Matt Simon — conversational mechanism in motion
 
 Best for climate effects, technologies, behaviour, and cause-and-effect processes.
 
 - Begin inside the process rather than with broad background.
 - Use vivid but accurate verbs.
-- Build an explicit causal chain and mark any unsupported link.
+- Build an explicit causal chain with accessible conversational explanation and mark any unsupported link.
 - Connect the mechanism to the wider system without exaggeration.
 
-## Brooke Jarvis — immersive ecological narrative
+## Brooke Jarvis — immersive ecological narrative and suspense
 
 Best for biodiversity, disappearance, human–nature relationships, and layered ecological stakes.
 
 - Open with a precise scene or revealing observation.
-- Widen gradually from one detail to the ecological context.
+- Reveal the stakes gradually as one detail widens into ecological context.
 - Keep organisms, people, and uncertainty within the same narrative frame.
 - End with resonance rather than a simplified solution.
 
-## Oliver Milman — threat-to-consequence environmental reporting
+## Oliver Milman — consequence-led environmental reporting
 
-Best for insect decline, pesticides, climate pressure, and conservation stories with measurable urgency.
+Best for insect decline, pesticides, climate pressure, and their ecological, agricultural, or economic consequences.
 
 - Lead with a documented change or evidence-backed threat.
-- Trace consequences from the organism to ecosystems and people.
-- Represent competing explanations and realistic responses.
+- Trace consequences through ecosystems, agriculture, livelihoods, or economics when evidence supports them.
+- Connect scientific evidence to realistic choices, policy, or response.
 - Create urgency from evidence, not unsupported catastrophe.
 
-## Gabriel Popkin — landscape-to-system science narrative
+## Gabriel Popkin — complexity and counterevidence
 
-Best for field ecology, soils, forests, climate, and research that connects observations across scales.
+Best for complex ecological systems, scale-dependent results, and questions shaped by competing evidence.
 
 - Anchor the story in a concrete observation or measurement.
-- Move deliberately from plot or organism to landscape and system.
-- Show how scientific methods reveal otherwise hidden connections.
-- End with the larger implication and its remaining uncertainty.
+- Complicate the first explanation with credible counterevidence.
+- Show how methods, scale, or assumptions produce different interpretations.
+- End with a cautious synthesis that preserves unresolved complexity.
 
 ## Carrie Arnold — scientific mystery and evidence trail
 
@@ -74,21 +74,21 @@ Best for unexplained outbreaks, competing hypotheses, disease ecology, and evide
 - Show how competing hypotheses are supported or eliminated.
 - Resolve only what the evidence allows and leave the open question visible.
 
-## Dave Goulson — accessible ecology and conservation
+## Dave Goulson — scientist-led persuasive ecology
 
 Best for pollinators, pesticides, gardens, natural history, and practical conservation implications.
 
-- Begin with a familiar organism or ecological encounter.
-- Explain interdependence in clear, concrete language.
-- Connect evidence to practical choices without preaching.
-- Close with a feasible implication supported by the science.
+- Begin with a familiar organism or scientifically grounded ecological encounter.
+- Build the argument from natural history and clearly attributed evidence.
+- Explain interdependence in accessible language before making a persuasive turn.
+- Close with a feasible, proportionate action supported by the science.
 
-## Dan Charles — people-centred agricultural reporting
+## Dan Charles — causal systems and practical trade-offs
 
 Best for food systems, agricultural decisions, technology adoption, and evidence with practical trade-offs.
 
 - Open with a real decision or trade-off created by the subject.
-- Translate methods and results into practical stakes.
+- Trace the causal chain from science through production, markets, or food systems.
 - Represent benefits, costs, and affected perspectives fairly.
 - Close with what the evidence can and cannot justify in practice.
 

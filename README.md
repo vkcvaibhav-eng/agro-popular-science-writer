@@ -15,20 +15,22 @@ The project supports two complementary interfaces:
 - Requires a central finding, mechanism, significance, uncertainty and at least two complete references before drafting.
 - Formats journal articles, magazine articles, webpages and reports in APA 7 structure, including DOI normalization, italics and hanging indents.
 - Builds in-text citations from the supplied references and does not invent missing evidence or quotations.
+- Uses the selected framework as a second-pass editor, revises weak sections, runs a final fact lock and displays the complete final article in chat.
+- Scores final framework alignment with an eight-category, 100-point rubric and gives an evidence-based editorial verdict.
 - Copies the article or downloads it as an editable Word-compatible `.doc` file.
 
 ## Editorial lenses
 
 - Gwen Pearson: creature-first natural history
 - Erik Stokstad: evidence-led reporting
-- Susan Milius: compact, surprising science
-- Matt Simon: mechanism in motion
-- Brooke Jarvis: immersive ecological narrative
-- Oliver Milman: threat-to-consequence environmental reporting
-- Gabriel Popkin: landscape-to-system science narrative
+- Susan Milius: compact biological action and surprise
+- Matt Simon: conversational mechanism in motion
+- Brooke Jarvis: immersive ecological narrative and suspense
+- Oliver Milman: consequence-led environmental reporting
+- Gabriel Popkin: complexity and counterevidence
 - Carrie Arnold: scientific mystery and evidence trail
-- Dave Goulson: accessible ecology and conservation
-- Dan Charles: people-centred agricultural reporting
+- Dave Goulson: scientist-led persuasive ecology
+- Dan Charles: causal systems and practical trade-offs
 - Original editorial blend: scene + evidence + explanation
 
 The frameworks apply analysed, high-level narrative architecture while preserving original wording. They do not reproduce signature phrases or imitate an author's exact voice.
@@ -53,7 +55,7 @@ When the repository is opened with Codex, ask:
 Use the Agro Popular Science Writer skill for [your scientific subject].
 ```
 
-The skill first researches and suggests five to seven evidence-backed titles. It pauses for title and framework selection, then builds the evidence map, verifies bibliographic metadata and drafts the article with APA 7 references.
+The skill first researches and suggests five to seven evidence-backed titles. It pauses for title and framework selection, then builds the evidence map, verifies bibliographic metadata and drafts the article with APA 7 references. After drafting, the selected framework acts as an editorial lens: it audits and revises the article, locks facts and citations, displays the complete final version in chat, and scores framework alignment out of 100.
 
 ## Run locally
 

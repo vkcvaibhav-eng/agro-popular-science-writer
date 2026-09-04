@@ -120,12 +120,12 @@ const AUTHORS: Array<{
   {
     id: "milius",
     name: "Susan Milius",
-    framework: "Compact biological surprise",
+    framework: "Compact biological action and surprise",
     bestFor: "Odd adaptations, counterintuitive results and short, sharply focused science features.",
     rules: [
-      "Lead with one surprising biological contradiction.",
+      "Lead with one surprising biological action or contradiction.",
       "Keep paragraphs compact and concrete.",
-      "Explain one central idea instead of surveying the whole field.",
+      "Let the behaviour or mechanism unfold as a clear sequence.",
       "End on the most intriguing unresolved question.",
     ],
     sections: ["The biological surprise", "A clue in the evidence", "The question behind the oddity"],
@@ -133,12 +133,12 @@ const AUTHORS: Array<{
   {
     id: "simon",
     name: "Matt Simon",
-    framework: "Mechanism in motion",
+    framework: "Conversational mechanism in motion",
     bestFor: "Climate effects, technology, behaviour and processes that unfold as a chain of causes.",
     rules: [
       "Begin inside the process, not with background.",
       "Use vivid verbs to make the mechanism move.",
-      "Build a clear cause-and-effect cascade.",
+      "Build a clear cause-and-effect cascade with accessible conversational explanation.",
       "Connect the mechanism to a wider system without exaggeration.",
     ],
     sections: ["Inside the mechanism", "The cascade", "Why the process reaches beyond itself"],
@@ -146,11 +146,11 @@ const AUTHORS: Array<{
   {
     id: "jarvis",
     name: "Brooke Jarvis",
-    framework: "Immersive ecological narrative",
+    framework: "Immersive ecological narrative and suspense",
     bestFor: "Biodiversity, disappearance, human–nature relationships and stories with layered stakes.",
     rules: [
       "Open with a precise scene or revealing moment.",
-      "Widen gradually from an individual detail to ecological stakes.",
+      "Reveal the stakes gradually as the scene widens into ecological context.",
       "Keep people, organisms and uncertainty in the same narrative frame.",
       "Close with resonance rather than a simplified solution.",
     ],
@@ -159,12 +159,12 @@ const AUTHORS: Array<{
   {
     id: "milman",
     name: "Oliver Milman",
-    framework: "Threat-to-consequence environmental reporting",
-    bestFor: "Insect decline, pesticides, climate pressure and conservation stories with measurable urgency.",
+    framework: "Consequence-led environmental reporting",
+    bestFor: "Insect decline, pesticides, climate pressure and their ecological, agricultural or economic consequences.",
     rules: [
       "Lead with a documented change or evidence-backed threat.",
-      "Trace consequences from the organism to ecosystems and people.",
-      "Represent competing explanations and realistic responses.",
+      "Trace consequences through ecosystems, agriculture, livelihoods or economics when evidence supports them.",
+      "Connect scientific evidence to realistic choices, policy or response.",
       "Create urgency from evidence, not unsupported catastrophe.",
     ],
     sections: ["The warning signal", "Following the consequences", "What a response requires"],
@@ -172,15 +172,15 @@ const AUTHORS: Array<{
   {
     id: "popkin",
     name: "Gabriel Popkin",
-    framework: "Landscape-to-system science narrative",
-    bestFor: "Field ecology, soils, forests, climate and research that connects observations across scales.",
+    framework: "Complexity and counterevidence",
+    bestFor: "Complex ecological systems, scale-dependent results and questions shaped by competing evidence.",
     rules: [
       "Anchor the story in a concrete observation or measurement.",
-      "Move deliberately from plot or organism to landscape and system.",
-      "Show how scientific methods reveal otherwise hidden connections.",
-      "End with the larger implication and its remaining uncertainty.",
+      "Complicate the first explanation with credible counterevidence.",
+      "Show how methods, scale or assumptions produce different interpretations.",
+      "End with a cautious synthesis that preserves unresolved complexity.",
     ],
-    sections: ["A signal in the field", "Across scales", "The larger system"],
+    sections: ["The initial pattern", "What complicates it", "A cautious synthesis"],
   },
   {
     id: "arnold",
@@ -198,24 +198,24 @@ const AUTHORS: Array<{
   {
     id: "goulson",
     name: "Dave Goulson",
-    framework: "Accessible ecology and conservation",
+    framework: "Scientist-led persuasive ecology",
     bestFor: "Pollinators, pesticides, gardens, natural history and practical conservation implications.",
     rules: [
-      "Begin with a familiar organism or ecological encounter.",
-      "Explain interdependence in clear, concrete language.",
-      "Connect evidence to practical choices without preaching.",
-      "Close with a feasible implication supported by the science.",
+      "Begin with a familiar organism or scientifically grounded ecological encounter.",
+      "Build the argument from natural history and clearly attributed evidence.",
+      "Explain interdependence in accessible language before making a persuasive turn.",
+      "Close with a feasible, proportionate action supported by the science.",
     ],
-    sections: ["The familiar encounter", "The web of dependence", "What the evidence makes possible"],
+    sections: ["The living connection", "The evidence behind concern", "A proportionate response"],
   },
   {
     id: "charles",
     name: "Dan Charles",
-    framework: "People-centred agricultural reporting",
+    framework: "Causal systems and practical trade-offs",
     bestFor: "Food systems, agricultural decisions, technology adoption and evidence with practical trade-offs.",
     rules: [
       "Open with a real decision or trade-off created by the subject.",
-      "Translate methods and results into practical stakes.",
+      "Trace the causal chain from science through production, markets or food systems.",
       "Represent benefits, costs and affected perspectives fairly.",
       "Close with what the evidence can and cannot justify in practice.",
     ],
@@ -239,6 +239,17 @@ const AUTHORS: Array<{
 function authorById(id: AuthorId) {
   return AUTHORS.find((author) => author.id === id) ?? AUTHORS[AUTHORS.length - 1];
 }
+
+const EDITORIAL_AUDIT_RUBRIC = [
+  { criterion: "Opening and hook", maximum: 10 },
+  { criterion: "Sentence construction and cadence", maximum: 15 },
+  { criterion: "Narrative structure and flow", maximum: 15 },
+  { criterion: "Vocabulary and technical explanation", maximum: 15 },
+  { criterion: "Research translation", maximum: 15 },
+  { criterion: "Evidence and uncertainty", maximum: 10 },
+  { criterion: "Subject and agricultural relevance", maximum: 10 },
+  { criterion: "Ending", maximum: 10 },
+];
 
 const DEFAULT_BRIEF: Brief = {
   subject: "Mites as hidden drivers of crop stress",
@@ -489,8 +500,8 @@ function openingFor(author: AuthorId, brief: Brief, evidence: Evidence, citation
       "The warning is measurable, not rhetorical. " + signal + " The documented signal is " +
       finding + " " + citations + " Following that signal reveals who and what may carry the consequences.",
     popkin:
-      "A single observation of " + subject + " can expose a process operating far beyond its immediate scale. " +
-      finding + " " + citations + " The task is to follow that connection without losing sight of how it was measured.",
+      "A single observation of " + subject + " can suggest a clear pattern, yet no such signal stands alone. " +
+      finding + " " + citations + " The task is to test that first explanation against scale, method and counterevidence.",
     arnold:
       "The story begins with a scientific puzzle: what can explain the changing evidence around " + subject + "? " +
       finding + " " + citations + " Each result is a clue, but no clue should be asked to prove more than it can.",
@@ -499,7 +510,7 @@ function openingFor(author: AuthorId, brief: Brief, evidence: Evidence, citation
       finding + " " + citations + " Understanding those connections is the first step toward judging what action the evidence supports.",
     charles:
       "The science of " + subject + " creates a practical decision, not merely an abstract question. " +
-      finding + " " + citations + " The significance lies in how evidence changes the available choices and their trade-offs.",
+      finding + " " + citations + " The significance lies in the causal chain connecting evidence to production, food systems and practical trade-offs.",
     blend:
       signal + " At the centre of the story is a finding that is both specific and consequential: " +
       finding + " " + citations,
@@ -522,7 +533,7 @@ function closingFor(author: AuthorId, subject: string, uncertainty: string) {
     milman:
       "The warning deserves attention because its consequences can be traced, not because the future is predetermined. What happens next depends on evidence, choices and the limits that remain. " + uncertainty,
     popkin:
-      "A single measurement becomes meaningful when its place in the larger system is visible. The remaining task is to learn where that connection holds and where scale changes the answer. " + uncertainty,
+      "A single measurement becomes meaningful when both its explanatory power and its counterevidence are visible. The remaining task is to learn which interpretation survives changes in method and scale. " + uncertainty,
     arnold:
       "The evidence resolves part of the mystery, but not all of it. The unanswered clue is therefore a research direction rather than a gap to disguise. " + uncertainty,
     goulson:
@@ -720,6 +731,15 @@ export default function Home() {
       "",
       "Selected framework rules:",
       ...activeAuthor.rules.map((rule) => "- " + rule),
+      "",
+      "Mandatory post-draft editorial audit:",
+      "- After drafting, act as a rigorous editor applying the selected high-level framework; do not impersonate or claim to be the named author.",
+      "- Audit the draft against every selected-framework rule, scientific accuracy, citations, uncertainty, readability and APA 7.",
+      "- Revise weak passages, then run a final fact lock so the edit introduces no claim drift or citation errors.",
+      "- Show the complete revised final article in chat; do not show an unedited rough draft unless I request it.",
+      "- After the reference list, show an editorial-audit table with a brief observable reason for every score.",
+      "- Score framework alignment out of 100 using: opening 10; sentence construction and cadence 15; narrative structure and flow 15; vocabulary and technical explanation 15; research translation 15; evidence and uncertainty 10; subject and agricultural relevance 10; ending 10.",
+      "- Give the total, rating band and a concise editorial verdict. The score measures high-level framework alignment, not similarity to the author's exact personal voice.",
       suppliedEvidence.length ? "" : "",
       suppliedEvidence.length ? "Evidence already supplied (verify it):" : "",
       ...suppliedEvidence.map((item) => "- " + item),
@@ -820,7 +840,7 @@ export default function Home() {
             </a>
           </div>
           <ol className="grid grid-cols-3 overflow-hidden rounded-xl border border-white/10 bg-white/5 text-xs sm:grid-cols-6 sm:text-sm">
-            {["1 Subject", "2 Titles", "3 Author", "4 Evidence", "5 Draft", "6 APA 7"].map((step, index) => (
+            {["1 Subject", "2 Titles", "3 Author", "4 Evidence", "5 Draft", "6 Edit + score"].map((step, index) => (
               <li
                 key={step}
                 className={"px-2 py-2.5 text-center " + (index === 1 ? "bg-[#d8f45b] font-semibold text-[#0b261d]" : "text-[#cbe0d5]")}
@@ -1205,6 +1225,29 @@ export default function Home() {
                   <li>DOIs normalized to the https://doi.org/ format without a final period.</li>
                   <li>Reference list alphabetized and exported with a hanging indent.</li>
                 </ul>
+              </div>
+              <div className="mt-6 rounded-xl border border-[#bcd7cb] bg-[#edf7f1] p-5">
+                <div className="flex items-start gap-3">
+                  <FileCheck2 className="mt-0.5 size-5 shrink-0 text-[#22734f]" />
+                  <div>
+                    <h3 className="font-semibold text-[#184a35]">Selected-framework final editor</h3>
+                    <p className="mt-1 text-sm leading-6 text-[#365a49]">
+                      In ChatGPT, {activeAuthor.name}&apos;s high-level framework audits the draft, revises weak passages, runs a final fact lock, and displays the revised article before its alignment score. The named author is not impersonated.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4 overflow-hidden rounded-lg border border-[#c9ddd3] bg-white">
+                  {EDITORIAL_AUDIT_RUBRIC.map((item) => (
+                    <div key={item.criterion} className="flex items-center justify-between gap-4 border-b border-[#e0ece6] px-3 py-2.5 text-sm last:border-b-0">
+                      <span className="text-[#365a49]">{item.criterion}</span>
+                      <strong className="shrink-0 text-[#184a35]">{item.maximum} points</strong>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-sm font-semibold text-[#184a35]">Total: 100 points</p>
+                <p className="mt-1 text-xs leading-5 text-[#587065]">
+                  90–100 excellent · 80–89 strong · 70–79 recognizable · 60–69 partial · below 60 weak. Every score must cite an observable feature of the final article.
+                </p>
               </div>
             </TabsContent>
           </Tabs>
