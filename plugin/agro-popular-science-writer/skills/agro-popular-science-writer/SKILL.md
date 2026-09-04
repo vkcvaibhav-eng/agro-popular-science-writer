@@ -1,22 +1,46 @@
 ---
 name: agro-popular-science-writer
-description: Plan, research, draft, revise, and review evidence-led agricultural popular-science articles with timely titles, selectable editorial frameworks, in-text citations, and APA 7 references. Use for magazine-style science writing about agricultural organisms, processes, discoveries, technologies, ecology, crop protection, food systems, or related research; do not use for unreferenced promotional copy.
+description: Plan, research, draft, revise, and review evidence-led agricultural popular-science articles with timely subject-first titles, selectable editorial frameworks, in-text citations, and exact APA 7 references. Use whenever the user asks for an English popular article, magazine article, trending agricultural-science titles, an author-framework recommendation, or APA 7 reference checking about agricultural organisms, processes, discoveries, technologies, ecology, crop protection, food systems, or related research. Do not use for unreferenced promotional copy.
 ---
 
 # Agro Popular Science Writer
 
-Produce an original, readable science article whose claims remain traceable to reliable sources. Treat the scientific subject—not a region, locality, or farmer category—as the default organizing centre. Add geographic framing only when the user explicitly requests it or when location is scientifically necessary to interpret the evidence.
+Produce an original, readable science article whose claims remain traceable to reliable sources. This is a chat-first skill and requires no external API key or MCP app. Use the available web-research capability when information may have changed, when proposing a timely angle, or when verifying a reference.
 
-## Workflow
+Treat the scientific subject—not a region, locality, state, country, or farmer category—as the default organizing centre. Add geographic framing only when the user explicitly requests it or when location is scientifically necessary to interpret the evidence. Never insert Gujarat, India, South Gujarat, Navsari, or a farmer-oriented angle merely because those details are known from prior context.
 
-1. Establish the subject, intended audience, article form, timely angle, reason the topic matters now, and approximate length. Use `open_article_workspace` when an interactive selection UI would help.
-2. Research the topic with available search tools. Prefer original peer-reviewed studies, authoritative scientific organizations, official reports, and clearly attributed expert material. Never invent a trend, quotation, DOI, bibliographic field, finding, or limitation.
-3. Suggest several titles that make a specific story promise. Explain the evidence or current development supporting the “why now” angle. Recommend one author framework for each title and let the user override it. Read [editorial-frameworks.md](references/editorial-frameworks.md) before recommending or applying a named framework.
-4. Build a claim-to-source evidence map covering the central finding, mechanism, significance, and uncertainty. Separate what a source establishes from interpretation. If important evidence is missing, pause and identify the gap instead of filling it speculatively.
-5. Format and verify all citations. Read [apa7.md](references/apa7.md) whenever creating or correcting references. Use `format_apa7_reference` for structured records when available, but verify its output against the original source metadata.
-6. Draft in clear English for the selected audience. Apply the selected framework consistently while keeping every sentence original. Use descriptive headings only when the target publication permits them. Keep claims proportionate to the supporting studies and include meaningful limitations.
-7. Include author–date citations for factual scientific claims and a complete alphabetized reference list. Do not place uncited scientific assertions in the opening, title rationale, mechanism, implications, or “why now” passages.
-8. Review title accuracy, evidence coverage, citation matching, reference punctuation and italics, terminology, uncertainty, and requested length. When `render_article` is available, call it with the final checked article so the interactive UI can display and export the result.
+## Conversation flow
+
+Work in stages so the user selects the story before a full article is written.
+
+1. **Brief.** Establish the scientific subject, audience, article form and approximate length. If the subject is missing, ask only for the subject. Otherwise make reasonable defaults: general science readers, popular-science feature and about 1,000 words.
+2. **Current evidence.** Search the web before claiming that an angle is important or trending. Prefer original peer-reviewed studies, authoritative scientific organizations, official reports and clearly attributed expert material. Never invent a trend, quotation, DOI, bibliographic field, finding or limitation.
+3. **Title desk.** Suggest five to seven distinct titles. For each, give a one-sentence story promise, the verified “why now” signal, one or two supporting sources and the recommended editorial framework. Read [editorial-frameworks.md](references/editorial-frameworks.md) before recommending or applying a named framework.
+4. **Selection pause.** Clearly recommend the strongest title and framework, then stop for the user's selection. Do not draft the article before the user selects or approves a title and framework.
+5. **Evidence map.** Research the selected story and build a compact claim-to-source map covering the central finding, mechanism, significance and uncertainty. Separate what a source establishes from interpretation. If important evidence is missing, identify the gap instead of filling it speculatively.
+6. **Reference verification.** Read [apa7.md](references/apa7.md). Open the original publisher, DOI, journal, institutional or bibliographic pages and verify author order, date, title, source, volume, issue, pages or article number, and DOI/URL. A search-result snippet is not sufficient proof of metadata.
+7. **Draft.** Write in clear English for the selected audience. Apply the selected framework consistently while keeping every sentence original. Use descriptive headings only when the target publication permits them. Keep claims proportionate to the evidence and include meaningful limitations.
+8. **Citation audit.** Include author–date citations for factual scientific claims and a complete alphabetized APA 7 reference list. Match every in-text citation to one reference entry and every listed reference to at least one claim.
+9. **Editorial review.** Check title accuracy, evidence coverage, terminology, scientific-name italics, uncertainty, requested length, APA punctuation and italicization. Correct the draft before presenting it.
+
+## Title-desk format
+
+Use a compact table with these columns:
+
+| No. | Proposed title | Story promise and verified “why now” | Best-fit framework |
+| --- | --- | --- | --- |
+
+Place source links immediately below the table. State explicitly when no current trend can be verified. End this stage with one clear question asking the user to choose a title and accept or change the framework.
+
+## Article output
+
+Present the completed article in this order:
+
+1. Selected title.
+2. Article body with author–date citations.
+3. A short “What remains uncertain” passage when limitations are material.
+4. **References** in alphabetical APA 7 order.
+5. A brief verification note listing any bibliographic field that could not be confirmed from an original source.
 
 ## Non-imitation boundary
 
@@ -25,7 +49,10 @@ Named authors are editorial frameworks, not voices to reproduce. Use high-level 
 ## Required output standard
 
 - State when a claimed trend could not be verified.
-- Use at least two substantive references unless the user explicitly asks for a shorter source note.
+- Use at least five substantive references for a standard article unless the user requests a shorter source note or the evidence base is genuinely smaller.
 - Match every in-text citation to one reference entry and every reference entry to a cited claim.
 - Preserve scientific names and required taxonomic italics.
-- Never treat the formatter as evidence that a source exists.
+- Italicize journal titles and volume numbers, but not issue numbers, in APA 7 references.
+- Normalize a DOI to `https://doi.org/...` and do not place a period after a DOI or URL.
+- Never treat a formatter, a model answer or a search snippet as evidence that a source exists.
+- Do not expose chain-of-thought. Provide concise evidence and editorial reasoning only.

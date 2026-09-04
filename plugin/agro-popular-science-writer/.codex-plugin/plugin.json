@@ -1,7 +1,7 @@
 {
   "name": "agro-popular-science-writer",
-  "version": "0.1.0",
-  "description": "Plan, research, draft and review referenced agricultural popular-science articles in ChatGPT.",
+  "version": "0.2.0",
+  "description": "A chat-first skill for researching, drafting and reviewing referenced agricultural popular-science articles.",
   "author": {
     "name": "Vaibhav K. Chaudhari",
     "url": "https://github.com/vkcvaibhav-eng"
@@ -19,10 +19,10 @@
   "interface": {
     "displayName": "Agro Popular Science Writer",
     "shortDescription": "Referenced agricultural popular-science writing",
-    "longDescription": "A subject-first writing workspace that helps ChatGPT research evidence, suggest timely titles, recommend an editorial framework, format APA 7 references and produce an original popular-science article through chat and an interactive UI.",
+    "longDescription": "A subject-first writing skill that researches evidence, suggests timely titles, recommends an editorial framework, verifies APA 7 references and produces an original agricultural popular-science article directly in chat.",
     "developerName": "Vaibhav K. Chaudhari",
     "category": "Education",
-    "capabilities": ["Interactive", "Research", "Write"],
+    "capabilities": ["Research", "Write"],
     "websiteURL": "https://agro-popular-science-writer.vkcvaibhav.chatgpt.site",
     "defaultPrompt": [
       "Plan a referenced article about an agricultural science topic",
@@ -30,6 +30,5 @@
       "Check my evidence and APA 7 references before drafting"
     ],
     "brandColor": "#0F5A3F"
-  },
-  "mcpServers": "./.mcp.json"
+  }
 }

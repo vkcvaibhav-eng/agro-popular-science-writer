@@ -510,6 +510,7 @@ export default function Home() {
   const [references, setReferences] = useState<ReferenceRecord[]>([]);
   const [draft, setDraft] = useState("");
   const [copied, setCopied] = useState(false);
+  const [requestCopied, setRequestCopied] = useState(false);
   const activeAuthor = AUTHORS.find((author) => author.id === selectedAuthor) || AUTHORS[5];
   const recommendation = AUTHORS.find((author) => author.id === recommendedAuthor) || AUTHORS[5];
   const referenceFormErrors = referenceErrors({ ...referenceForm, id: "draft" });
@@ -575,6 +576,51 @@ export default function Home() {
     if (!canDraft) return;
     setDraft(buildDraft(brief, evidence, selectedTitle, selectedAuthor, references));
     setCopied(false);
+  }
+
+  async function copySkillRequest() {
+    const suppliedEvidence = [
+      evidence.finding.trim() ? "Central finding: " + evidence.finding.trim() : "",
+      evidence.mechanism.trim() ? "Mechanism: " + evidence.mechanism.trim() : "",
+      evidence.significance.trim() ? "Significance: " + evidence.significance.trim() : "",
+      evidence.uncertainty.trim() ? "Uncertainty: " + evidence.uncertainty.trim() : "",
+      evidence.expertVoice.trim() ? "Expert material: " + evidence.expertVoice.trim() : "",
+    ].filter(Boolean);
+    const suppliedReferences = sortedReferences(references).map((reference) => formatApa(reference));
+    const request = [
+      "Use the Agro Popular Science Writer skill for this assignment.",
+      "",
+      "Scientific subject: " + subjectLabel(brief.subject),
+      "Selected title: " + selectedTitle,
+      "Selected editorial framework: " + activeAuthor.name + " — " + activeAuthor.framework,
+      "Field: " + brief.field,
+      "Audience: " + brief.audience,
+      "Article form: " + brief.goal,
+      "Trend angle to verify: " + brief.trend,
+      "Why now (verify before using): " + (brief.whyNow.trim() || "Not supplied"),
+      "Target length: approximately " + brief.targetWords + " words",
+      "",
+      "Requirements:",
+      "- Keep the article subject-first and avoid regional or location-based framing unless scientifically necessary.",
+      "- Research current, authoritative evidence before drafting.",
+      "- Apply only the high-level editorial framework; keep all wording original.",
+      "- Use author–date citations and at least five substantive references.",
+      "- Verify every bibliographic field and format the reference list in exact APA 7 style.",
+      "- State meaningful limitations and never invent evidence, quotations, DOIs or metadata.",
+      suppliedEvidence.length ? "" : "",
+      suppliedEvidence.length ? "Evidence already supplied (verify it):" : "",
+      ...suppliedEvidence.map((item) => "- " + item),
+      suppliedReferences.length ? "" : "",
+      suppliedReferences.length ? "References already supplied (verify them):" : "",
+      ...suppliedReferences.map((item) => "- " + item.replace(/\*/g, "")),
+    ]
+      .filter((line, index, lines) => line !== "" || lines[index - 1] !== "")
+      .join("\n")
+      .trim();
+
+    await navigator.clipboard.writeText(request);
+    setRequestCopied(true);
+    window.setTimeout(() => setRequestCopied(false), 1800);
   }
 
   async function copyDraft() {
@@ -974,12 +1020,22 @@ export default function Home() {
                 </p>
               </div>
 
-              <Button className="mt-6 h-11 w-full bg-[#0f5a3f] text-white hover:bg-[#0b472f]" disabled={!canDraft} onClick={generateDraft}>
-                <BookOpenText /> Write referenced article
+              <div className="mt-6 rounded-xl border border-[#bcd7cb] bg-[#edf7f1] p-4">
+                <p className="font-semibold text-[#184a35]">ChatGPT Plus workflow</p>
+                <p className="mt-1 text-sm leading-6 text-[#365a49]">
+                  Copy the completed brief, paste it into ChatGPT Work or Codex, and the Agro Popular Science Writer skill will research and write the article in chat. No external API key is required.
+                </p>
+                <Button className="mt-4 h-11 w-full bg-[#0f5a3f] text-white hover:bg-[#0b472f]" onClick={copySkillRequest}>
+                  {requestCopied ? <Check /> : <Clipboard />} {requestCopied ? "Skill request copied" : "Copy skill request for ChatGPT"}
+                </Button>
+              </div>
+
+              <Button className="mt-3 h-11 w-full" variant="outline" disabled={!canDraft} onClick={generateDraft}>
+                <BookOpenText /> Build manual evidence draft
               </Button>
               {!canDraft && (
                 <p className="mt-3 text-center text-xs leading-5 text-[#8a5a1f]">
-                  Add the four required evidence fields and at least two complete APA references before drafting.
+                  The manual draft requires all four evidence fields and at least two complete APA references. The ChatGPT skill request above does not.
                 </p>
               )}
             </TabsContent>

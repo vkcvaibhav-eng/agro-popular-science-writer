@@ -2,10 +2,10 @@
 
 An evidence-led English agricultural popular-science writing workspace. It turns a subject and research brief into an editable article, applies a selected narrative framework, validates references, and exports a Word-compatible file.
 
-The project supports two interfaces:
+The project supports two complementary interfaces:
 
 - A standalone web editor at `https://agro-popular-science-writer.vkcvaibhav.chatgpt.site`.
-- An MCP Apps interface that renders inside ChatGPT and hands the completed brief to the conversation for research, drafting and revision.
+- A chat-first Codex skill that researches current evidence, proposes titles, recommends an editorial framework and writes the referenced article without external API keys.
 
 ## What it does
 
@@ -32,25 +32,23 @@ The frameworks apply analysed, high-level narrative architecture while preservin
 
 Enter authors as `Family name, Given names`, separated by semicolons. The app creates initials and punctuation, alphabetizes the list, italicizes journal and magazine source elements where required, and converts bare DOIs to `https://doi.org/...` form.
 
-## ChatGPT plugin
+## Codex skill
 
-The streamable HTTP MCP endpoint is:
+The skill source is located at:
 
 ```text
-https://agro-popular-science-writer.vkcvaibhav.chatgpt.site/mcp
+plugin/agro-popular-science-writer/skills/agro-popular-science-writer/SKILL.md
 ```
 
-The installable plugin source is in `plugin/agro-popular-science-writer`. It contains the plugin manifest, MCP connection definition, writing skill, APA 7 checks and editorial-framework guidance.
+The installable plugin source is in `plugin/agro-popular-science-writer`. It contains the plugin manifest, writing skill, APA 7 checks and editorial-framework guidance. It is deliberately skill-only: it has no MCP or external API dependency.
 
-The MCP server exposes five tools:
+When the repository is opened with Codex, ask:
 
-- `open_article_workspace`
-- `suggest_titles`
-- `format_apa7_reference`
-- `prepare_article_request`
-- `render_article`
+```text
+Use the Agro Popular Science Writer skill for [your scientific subject].
+```
 
-The first and final tools return the embedded writer UI. The intermediate tools keep title generation, reference formatting and brief validation reusable from either chat or the UI.
+The skill first researches and suggests five to seven evidence-backed titles. It pauses for title and framework selection, then builds the evidence map, verifies bibliographic metadata and drafts the article with APA 7 references.
 
 ## Run locally
 
